@@ -10,7 +10,7 @@
 
         const NSUInteger size = [_specifiers count];
         for (NSInteger i = size - 1; i >= 0; i--) {
-            if ([[_specifiers[i] propertyForKey:@"key"] containsString:@"lock"]) {
+            if ([[NSString stringWithFormat:@"%@", [_specifiers[i] propertyForKey:@"hideOnIpad"]] containsString:@"1"]) {
                 [_specifiers removeObjectAtIndex:i];
             }
         }
@@ -193,6 +193,15 @@
 
 - (void)openURL:(NSString *)url {
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url] options:@{} completionHandler:nil];
+}
+
+- (void)setPreferenceValue:(id)value specifier:(PSSpecifier *)specifier {
+    NSString *prefKey = specifier.properties[@"key"];
+    NSString *valueStr = [NSString stringWithFormat:@"%@",value];
+    
+    if([prefKey isEqualToString:@"globalHapticsWithID"] && ![valueStr isEqualToString:@"0"]) AudioServicesPlaySystemSound([valueStr floatValue]);
+
+    [super setPreferenceValue:value specifier:specifier];
 }
 
 @end

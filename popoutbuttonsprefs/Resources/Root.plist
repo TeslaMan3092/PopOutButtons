@@ -98,6 +98,59 @@
 		</dict>
 		<dict>
 			<key>cell</key>
+			<string>PSStaticTextCell</string>
+			<key>label</key>
+			<string>Haptics On Press</string>
+			<key>hideOnIpad</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSegmentCell</string>
+			<key>defaults</key>
+			<string>com.teslaman3092.popoutbuttonsprefs</string>
+			<key>PostNotification</key>
+	        <string>com.teslaman3092.popoutbuttonsprefs-updated</string>
+			<key>key</key>
+			<string>globalHapticsWithID</string>
+			<key>default</key>
+			<integer>1</integer>
+			<key>validTitles</key>
+			<array>
+				<string>Off</string>
+				<string>Pop</string>
+				<string>Big Pop</string>
+				<string>3 Pops</string>
+			</array>
+			<key>validValues</key>
+			<array>
+				<integer>0</integer>
+				<integer>1519</integer>
+				<integer>1520</integer>
+				<integer>1521</integer>
+			</array>
+			<key>hideOnIpad</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>com.teslaman3092.popoutbuttonsprefs</string>
+			<key>PostNotification</key>
+	        <string>com.teslaman3092.popoutbuttonsprefs-updated</string>
+			<key>key</key>
+			<string>globalHapticsOnBtnRelease</string>
+			<key>label</key>
+			<string>Haptics On Button Release</string>
+			<key>hideOnIpad</key>
+			<true/>
+		</dict>
+
+		<dict>
+			<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>label</key>
 			<string>Volume Up Button</string>
@@ -301,16 +354,16 @@
 			<string>PSGroupCell</string>
 			<key>label</key>
 			<string>Lock/Power Button</string>
-			<key>key</key>
-			<string>lock</string>
+			<key>hideOnIpad</key>
+			<true/>
 		</dict>
 		<dict>
 			<key>cell</key>
 			<string>PSStaticTextCell</string>
 			<key>label</key>
 			<string>Y Offset</string>
-			<key>key</key>
-			<string>lock</string>
+			<key>hideOnIpad</key>
+			<true/>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -329,6 +382,8 @@
 			<integer>100</integer>
 			<key>showValue</key>
 			<true/>
+			<key>hideOnIpad</key>
+			<true/>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -337,6 +392,8 @@
 			<string>Size Offset</string>
 			<key>key</key>
 			<string>lock</string>
+			<key>hideOnIpad</key>
+			<true/>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -354,6 +411,8 @@
 			<key>max</key>
 			<integer>100</integer>
 			<key>showValue</key>
+			<true/>
+			<key>hideOnIpad</key>
 			<true/>
 		</dict>
 		<dict>
@@ -381,6 +440,8 @@
 			<integer>30</integer>
 			<key>showValue</key>
 			<true/>
+			<key>hideOnIpad</key>
+			<true/>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -403,6 +464,8 @@
 			<integer>1</integer>
 			<key>PostNotification</key>
 	        <string>com.teslaman3092.popoutbuttonsprefs-updated</string>
+			<key>hideOnIpad</key>
+			<true/>
 		</dict>
 		<dict>
 			<key>cell</key>

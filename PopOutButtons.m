@@ -6,9 +6,6 @@
     self = [super init];
 
     if (self) {
-        // self.fillColor = [UIColor whiteColor].CGColor;
-        // self.lineWidth = 0.5;
-        // self.strokeColor = [UIColor clearColor].CGColor;
         self.disableUpdateMask = (1 << 1) | (1 << 4); // Hide the popouts when you screen capture, Thx -> https://nsantoine.dev/posts/CALayerCaptureHiding
         
         NSDictionary *const prefs = [[NSUserDefaults standardUserDefaults] persistentDomainForName:@"com.teslaman3092.popoutbuttonsprefs"];

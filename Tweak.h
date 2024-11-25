@@ -1,3 +1,4 @@
+#import <AudioToolbox/AudioToolbox.h>
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 #import <CoreGraphics/CoreGraphics.h>
@@ -30,8 +31,7 @@
 @end 
 
 @interface SBHUDWindow : UIWindow
-- (void)_pob_setHUDShiftOut:(BOOL)shiftO
-
+- (void)_pob_setHUDShiftOut:(BOOL)shift;
 @end
 
 @interface SBSecureWindow : UIWindow

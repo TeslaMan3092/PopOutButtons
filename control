@@ -1,6 +1,6 @@
 Package: com.teslaman3092.popoutbuttons
 Name: PopOutButtons
-Version: 1.0.1
+Version: 1.0.2b1
 Architecture: iphoneos-arm
 Description: PopOutButtons bring the iOS 18 buttons popouts to iOS 13-17
 Maintainer: teslaman3092

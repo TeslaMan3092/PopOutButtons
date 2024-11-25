@@ -1,3 +1,4 @@
+#import <AudioToolbox/AudioToolbox.h>
 #import <Foundation/Foundation.h>
 #import <Foundation/NSDistributedNotificationCenter.h>
 #import <Preferences/PSListController.h>

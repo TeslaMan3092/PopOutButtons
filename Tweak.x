@@ -20,6 +20,8 @@ static CGFloat lockButtonCurvedness = 0.0f;
 static UIColor *lockPopoutColor = nil;
 
 static CGFloat globalBorderWidth = 0.0f;
+static CGFloat globalHapticsWithID = 0.0f;
+static BOOL globalHapticsOnBtnRelease;
 static UIColor *globalBorderColor = nil;
 
 static unsigned int invisibleToScreenCaptures = 0;
@@ -30,6 +32,8 @@ static void updatePrefs(void) {
 	invisibleToScreenCaptures = (prefs && [prefs objectForKey:@"invisibleToScreenCaptures"] ? [[prefs valueForKey:@"invisibleToScreenCaptures"] boolValue] : YES ) ? (1 << 1) | (1 << 4) : 0;
 	globalBorderColor = [GcColorPickerUtils colorFromDefaults:@"com.teslaman3092.popoutbuttonsprefs" withKey:@"globalBorderColor" fallback:@"5C5C5CFF"];
 	globalBorderWidth = [prefs objectForKey:@"globalBorderWidth"] ? [[prefs valueForKey:@"globalBorderWidth"] floatValue] : 0.2;
+	globalHapticsWithID = [prefs objectForKey:@"globalHapticsWithID"] ? [[prefs valueForKey:@"globalHapticsWithID"] floatValue] : 1519;
+	globalHapticsOnBtnRelease = (prefs && [prefs objectForKey:@"globalHapticsOnBtnRelease"] ? [[prefs valueForKey:@"globalHapticsOnBtnRelease"] boolValue] : NO );
 
 	volUpPopoutColor = [GcColorPickerUtils colorFromDefaults:@"com.teslaman3092.popoutbuttonsprefs" withKey:@"volUpPopoutColor" fallback:@"000000"];
 	volDownPopoutColor = [GcColorPickerUtils colorFromDefaults:@"com.teslaman3092.popoutbuttonsprefs" withKey:@"volDownPopoutColor" fallback:@"000000"];
@@ -47,6 +51,7 @@ static void updatePrefs(void) {
 	SpringBoard *const springBoard = (SpringBoard *)[%c(SpringBoard) sharedApplication];
 	POBRootViewContoller *const pobRootVC = (POBRootViewContoller *)[springBoard _pobWindow].rootViewController;
 	[pobRootVC.lockButtonLayer updateStateWithShowing:self.isButtonDown];
+	if(self.isButtonDown || globalHapticsOnBtnRelease) AudioServicesPlaySystemSound(globalHapticsWithID);
 }
 
 %end
@@ -63,13 +68,15 @@ static void updatePrefs(void) {
 	if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
 		SBVolumeButtonEventMapper *const eventMapper = [springBoard volumeButtonEventMapper];
 		reverseButtons = (eventMapper.effectiveInterfaceOrientation == 2 || eventMapper.effectiveInterfaceOrientation == 3);
+	}else if(down || globalHapticsOnBtnRelease){
+		AudioServicesPlaySystemSound(globalHapticsWithID);
 	}
 
 	if (buttonType == (reverseButtons ? 103 : 102)) [pobRootVC.volUpLayer updateStateWithShowing:down];
 	if (buttonType == (reverseButtons ? 102 : 103)) [pobRootVC.volDownLayer updateStateWithShowing:down];
 
 
-	if((pobRootVC.volUpLayer.isShowing || pobRootVC.volDownLayer.isShowing) && !down) return;
+	if(((pobRootVC.volUpLayer.isShowing || pobRootVC.volDownLayer.isShowing) && !down) || [UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) return;
 
 	SBHUDController *const HUDController = [self valueForKey:@"_hudController"];
 	if([HUDController anyHUDsVisible]){
